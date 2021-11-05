@@ -7,3 +7,31 @@ h2{
     	cursor: pointer;
     	font-family: 'Raleway', sans-serif;
 }
+
+#icons {
+	font-size: 40px;
+	margin-top: 1px;
+	position:fixed;
+	margin: 10px;
+	top: 0;
+	right: 0;
+}   
+    
+.link {
+	cursor: pointer;
+	color: inherit;
+	text-decoration: inherit; 
+}
+
+#box{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	height: 100px;
+	background-color: aqua;
+
+}
+
+#l {
+	height: 60px;
+}
