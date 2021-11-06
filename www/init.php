@@ -1,6 +1,6 @@
 <?php
 $dbsever="localhost";
 $dbusername="root";
-$dbpassword="seedubuntu";
+$dbpassword="";
 $dbname="e-com";
 ?>
