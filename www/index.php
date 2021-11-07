@@ -18,11 +18,7 @@
 		<div id="box">
 			<?php
 				session_start();
-				#include '.gitignore/init.php';
-				$dbsever="localhost";
-				$dbusername="root";
-				$dbpassword="seedubuntu";
-				$dbname="e-com";
+				include '.gitignore/init.php';
 
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't 						connect");
 
