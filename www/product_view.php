@@ -29,6 +29,7 @@
 			<?php
 				include 'init.php';
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
+				$connect->set_charset("utf8");
 				$query = "SELECT * FROM product WHERE product_ID = '$productID'";
 				if(!$result = $connect->query($query)) {
 					die('Error query');
