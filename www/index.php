@@ -18,11 +18,8 @@
 		<div id="box">
 			<?php
 				session_start();
-				#include '.gitignore/init.php';
-				$dbsever="localhost";
-				$dbusername="root";
-				$dbpassword="seedubuntu";
-				$dbname="e-com";
+				include '.gitignore/init.php';
+
 
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't 						connect");
 
@@ -47,20 +44,34 @@
 				$len = sizeof($result_array);
 				for($i=0;$i< $len;$i++) {
 					$utfEncodedArray = array_map("utf8_encode", $result_array[$i] );
+					$Product_ID = $utfEncodedArray['Product_ID'];
+					$Name = $utfEncodedArray['Name'];
+					$Stock = $utfEncodedArray['Stock'];
+					$Description = $utfEncodedArray['Description'];
+					$Price = $utfEncodedArray['Price'];
+					
 					#print_r($utfEncodedArray);
-					foreach($utfEncodedArray as $key => $value)
-					{
-	  					if($key == Name) {
-							echo "<div class='product'>";
-							echo "<div class='pimg'>";
-							echo "</div>";
-							echo "<p class='pName'> $value </p>";
-							echo "<div class='toCart'>";
-							echo "<p class='add'>Add</p>";
-							echo "</div></div>";						
+					#foreach($utfEncodedArray as $key => $value)
+					#{
+	  					#if($key == Name) {
+
+
+					echo "<div class='product'>";
+					echo "<div class='pimg'>";
+					echo "</div>";
+					echo "<p class='pName'> $Name </p>";
+
+					echo "<form method='post' action='product_view.php'>";
+    					echo "<input type='hidden' name='product_id' value='$Product_ID'>";
+    					echo "<input class='toView' type='submit' value='View'>";
+					echo "</form>";
+
+					echo "<div class='toCart'>";
+					echo "<p class='add'>Add</p>";
+					echo "</div></div>";						
 	
-						}
-					}
+						#}
+					#}
 
 
 				}
