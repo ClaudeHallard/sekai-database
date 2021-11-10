@@ -37,7 +37,7 @@
 					array_push($result_array,$picksRow);
 				}
 				#connect->close();
-				
+				#work!
 				#print_r($result_array);
 
 				
@@ -66,6 +66,7 @@
     					echo "<input class='toView' type='submit' value='View'>";
 					echo "</form>";
 
+					echo "<p class='price'>$Price kr</p>";
 					echo "<div class='toCart'>";
 					echo "<p class='add'>Add</p>";
 					echo "</div></div>";						

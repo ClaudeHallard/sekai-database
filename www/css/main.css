@@ -116,6 +116,15 @@ h2{
 	font-size: 20px;
 }
 
+.price {
+	float:left;
+	margin-left: 15px;
+	padding-top: 13px;
+	margin-bottom: auto;
+	margin-top: auto;
+	font-size: 20px;
+}
+
 .toView {
 	padding-top: 3px;
 	margin-bottom: auto;
