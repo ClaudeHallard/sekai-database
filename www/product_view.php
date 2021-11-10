@@ -1,6 +1,10 @@
 <?php
     session_start();
-	$productID = $_POST['product_id'];
+
+	$productID = 1;
+	if(!empty($_POST['product_id'])) {
+		$productID = $_POST['product_id'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -22,32 +26,37 @@
 			<div class="photo">
 		    	Photo: placeholder
 			</div>
-			<!-- <?php
-				// include 'init.php';
-				// $connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
-				// echo "I made it here";
-				// $query = "SELECT * FROM product";
-				// echo "I made it here";
-				// $result = $connect->query($query);
-				// echo "I made it here";
-				// echo $result;
-			?> -->
+			<?php
+				include 'init.php';
+				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
+				$query = "SELECT * FROM product WHERE product_ID = '$productID'";
+				if(!$result = $connect->query($query)) {
+					die('Error query');
+				}
+				$product = $result->fetch_row();
+
+				$product_name = $product[1];
+				$product_stock = $product[2];
+				$product_description = $product[3];
+				$product_price = $product[4];
+				
+			?>
 			<div class="container">
 				<div class="name">
-					Name: placeholder
+					<p><?php echo $product_name ?></p>
 				</div>
 				<div>
 					<div class="price">
-						Price: placeholder
+						Price: <?php echo $product_price ?>
 					</div>
 					<div class="stock">
-						Stock: placeholder
+						Stock: <?php echo $product_stock ?>
 					</div>
 				</div>
 			</div>
 
 			<div class="description">
-		    	Description: placeholder
+				<?php echo "<p>$product_description</p>" ?>
 			</div>
 		</div>
 	</body>

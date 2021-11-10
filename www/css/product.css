@@ -26,11 +26,12 @@
     font-size: 50px;
 }
 .product {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: haleboplight, Helvetica, Arial, sans-serif;
     margin-top: 80px;
     border: 5px solid rgb(80, 0, 80);
 }
 .container {
+    margin: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -40,19 +41,40 @@
     background-color: blanchedalmond;
 }
 .price {
+    
+    border: 1px solid black;
     padding: 5px;
     background-color:blueviolet;
+    height: 50%;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 .stock {
+    
+    border: 1px solid black;
     padding: 5px;
     background-color:yellow;
+    height: 50%;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 .name {
-    margin: auto auto auto 0;
+    
+    border: 3px solid black;
+    margin: auto;
+    font-weight: bold;
+    text-transform: capitalize;
     padding: 10px;
+    position: relative;
+    width: 100%;
     background-color: bisque;
 }
 .description {
+    margin: auto 10px 10px;;
+    border: 1px solid black;
     padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
     background-color: aquamarine;
+    width: 50%;
+    text-indent: 50px;
 }
