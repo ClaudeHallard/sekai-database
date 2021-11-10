@@ -18,7 +18,7 @@
 		<div id="box">
 			<?php
 				session_start();
-				include '.gitignore/init.php';
+				include 'init.php';
 
 
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't 						connect");
