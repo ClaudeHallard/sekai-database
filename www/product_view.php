@@ -48,7 +48,7 @@
 				</div>
 				<div>
 					<div class="price">
-						Price: <?php echo $product_price ?>
+						Price: <?php echo $product_price ?> 
 					</div>
 					<div class="stock">
 						Stock: <?php echo $product_stock ?>
@@ -59,6 +59,15 @@
 			<div class="description">
 				<?php echo "<p>$product_description</p>" ?>
 			</div>
+
 		</div>
+		<div class="addProdButton">
+			Add to cart
+		</div>
+		<!--
+		<div class="checkButtonion">
+		<a href="checkout_view.php">Checkout</a>
+		</div>	
+			-->
 	</body>
 </html>
