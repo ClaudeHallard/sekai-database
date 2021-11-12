@@ -48,10 +48,10 @@
 				</div>
 				<div>
 					<div class="price">
-						Price: <?php echo $product_price ?>
+						Price: <?php echo $product_price . " kr" ?>
 					</div>
 					<div class="stock">
-						Stock: <?php echo $product_stock ?>
+						Stock: <?php echo $product_stock . " st" ?>
 					</div>
 				</div>
 			</div>
