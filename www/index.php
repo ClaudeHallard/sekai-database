@@ -21,7 +21,7 @@
 				include 'init.php';
 
 
-				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't 						connect");
+				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 
 
 				$query = "SELECT Product_ID, Name, Stock, Description, Price
@@ -31,15 +31,39 @@
 					die('Error query');
 				}
 
-
+				#array to load in product information 
 				$result_array = array();
 				while($picksRow = $result->fetch_assoc()){
 					array_push($result_array,$picksRow);
 				}
 				#connect->close();
-				#work!
+
 				#print_r($result_array);
 
+				# function to add products to cart
+				#array for Cart
+				/*$p = 1;
+				if($p == 1) {
+					$cart = array();
+					$p ++;
+					echo $p;
+				}
+				function addThisToCart($productToAdd,$array) {
+					array_push($array,$productToAdd);
+					#echo "this is it " . $productToAdd;
+					#echo $cart[0];
+
+					#print_r($array);
+					return $array;
+				}
+	
+				if(isset($_POST['addToCart'])) {
+					$pID = $_POST['addToCart'];
+					#$cart2 = addThisToCart($pID,$cart);
+					array_push($cart,$pID);
+					
+					print_r($cart);
+				}*/
 				
 				$len = sizeof($result_array);
 				for($i=0;$i< $len;$i++) {
@@ -60,16 +84,22 @@
 					echo "<div class='pimg'>";
 					echo "</div>";
 					echo "<p class='pName'> $Name </p>";
-
+					
+					#echo "<form method='get' action='product_view.php'>";
 					echo "<form method='post' action='product_view.php'>";
     					echo "<input type='hidden' name='product_id' value='$Product_ID'>";
     					echo "<input class='toView' type='submit' value='View'>";
 					echo "</form>";
 
+					/*echo "<form method='post' action=''>";
+    					echo "<input type='hidden' name='addToCart' value='$Product_ID'>";
+    					echo "<input class='toView' type='submit' value='Add'>";
+					echo "</form>";*/
+
 					echo "<p class='price'>$Price kr</p>";
 					echo "<div class='toCart'>";
-					echo "<p class='add'>Add</p>";
-					echo "</div></div>";						
+					echo "<p class='add'>Add</p> </div>";
+					echo "</div>";						
 	
 						#}
 					#}
