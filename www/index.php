@@ -45,6 +45,11 @@
 				while($picksRow = $result->fetch_assoc()){
 					array_push($result_array,$picksRow);
 				}
+
+				if(!isset($_SESSION['cartArray'])) {
+					$cart = array();
+					$_SESSION['cartArray'] = $cart;
+				}
 				#connect->close();
 
 				#print_r($result_array);
