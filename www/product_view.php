@@ -15,13 +15,15 @@
         	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/product.css">
+		<link rel="stylesheet" href="css/menu.css">
 	</head>
     
 	<body>
-		<div class="topbar">
+		<?php include 'menu.php'; ?>
+		<!-- <div class="topbar">
 			<a href="index.php" class="home material-icons">home</a>
 		    <a href="#" class="cart material-icons">shopping_cart_checkout</a>
-		</div>
+		</div> -->
 		<div class="product">
 			<div class="photo">
 		    	Photo: placeholder
