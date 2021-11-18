@@ -19,6 +19,7 @@
 
 	$len = sizeof($cart);
 	for($i=0;$i< $len;$i++) {
-		echo "<p> works $_SESSION['CartArray'][$i] </p>";
+		echo "<p> works" . $_SESSION['cartArray'][$i];  
+		echo "</p>";
 	}
 ?>
