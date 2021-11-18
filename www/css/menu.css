@@ -1,0 +1,30 @@
+.topbar {
+  	position: -webkit-sticky;
+  	position: sticky;
+    	border-bottom: 1px solid black;
+    	/*margin: 10px;*/
+  	/*position: -webkit-sticky;
+  	position: sticky;*/
+    	top:0;
+    	left:0;
+    	right:0;
+	height:80px;
+	background-color: #cae8ca;
+}
+
+.cart{
+    	float: right;
+    	position: relative;
+    	/*color: rgb(80, 0, 80);*/
+	color: inherit;
+	text-decoration: inherit;
+    	font-size: 50px;
+}
+
+.home{
+    	position: relative;
+    	/*color: rgb(80, 0, 80);*/
+	color: inherit;
+	text-decoration: inherit;
+    	font-size: 50px;
+}
