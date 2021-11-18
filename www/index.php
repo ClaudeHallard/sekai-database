@@ -6,18 +6,27 @@
         	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/menu.css">
 	</head>
 
 	<body>
 
-		<div id="l">
+		<!--<div id="l">
 		    <a href="#" class="link"><i class="material-icons" id="icons">shopping_cart_checkout</i></a>
+		</div>-->
+		<?php  
+		session_start();
+		include 'menu.php';
+		?>
+		<div id="canvas">
+			<div id="top-pointer"> </div>
+			<iframe name="iframeCart" id="cartFrame" src="addToCart.php" height="400" width="300" name="IframeCart"></iframe>
 		</div>
 		<!--<?php echo "<h2>Det är givet att te är livet!!</h2>"; 
 		echo "<p class='add'>Add</p>";?>-->
 		<div id="box">
 			<?php
-				session_start();
+				
 				include 'init.php';
 
 
@@ -91,14 +100,14 @@
     					echo "<input class='toView' type='submit' value='View'>";
 					echo "</form>";
 
-					/*echo "<form method='post' action=''>";
+					echo "<form method='post' target='iframeCart' action='addToCart.php'>";
     					echo "<input type='hidden' name='addToCart' value='$Product_ID'>";
     					echo "<input class='toView' type='submit' value='Add'>";
-					echo "</form>";*/
+					echo "</form>";
 
 					echo "<p class='price'>$Price kr</p>";
-					echo "<div class='toCart'>";
-					echo "<p class='add'>Add</p> </div>";
+					/*echo "<div class='toCart'>";
+					echo "<p class='add'>Add</p> </div>";*/
 					echo "</div>";						
 	
 						#}
