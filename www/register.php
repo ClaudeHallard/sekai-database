@@ -28,70 +28,69 @@
 		</div><div> -->
 		<div class="registerform">
 			<div class="signup">SIGN UP</div>
-			<form action="" method="post" autocomplete="off">
-				<label for="lname">Email</label><br>
+			<form action="" id="register_form" method="post" autocomplete="off">
+				<label>Email</label><br>
 				<input type="text" id="Email" name="email" placeholder="Enter email" required><br>
-				<label for="pword">Password</label><br>
+				<label>Password</label><br>
 				<input type="password" id="Password" name="password" placeholder="**********" required><br>
 				<br>
-				<label for="fname">First name</label><br>
+				<label>First name</label><br>
 				<input type="text" id="fname" name="fname" placeholder="Enter first name" required><br>
-				<label for="lname">Last name</label><br>
+				<label>Last name</label><br>
 				<input type="text" id="lname" name="lname" placeholder="Enter last name" required><br>
-				<label for="lname">Phone</label><br>
+				<label>Phone</label><br>
 				<input type="text" id="Phone" name="phone" placeholder="Enter phone number" required><br>
-				<label for="lname">Address</label><br>
+				<label>Address</label><br>
 				<input type="text" id="Address" name="address" placeholder="Enter address" required><br>
-				<label for="lname">City</label><br>
+				<label>City</label><br>
 				<input type="text" id="City" name="city" placeholder="Enter city" required><br>
-				<label for="lname">Postal code</label><br>
+				<label>Postal code</label><br>
 				<input type="text" id="Postalcode" name="postalcode" placeholder="Enter postalcode" required><br>
 				<input type="submit" class="submit" name="SubmitButton" value="Create Account"/>
 			</form>
-		</div>
 
-		<?php
-			if(isset($_POST['SubmitButton'])){
-				if (!empty($_POST['email']) && 
-					!empty($_POST['lname']) && 
-					!empty($_POST['fname']) && 
-					!empty($_POST['phone']) && 
-					!empty($_POST['address']) && 
-					!empty($_POST['city']) && 
-					!empty($_POST['postalcode']))
-				{
-				
-					include 'init.php';
-					$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
-					
-					$email = mysqli_real_escape_string($connect, $_POST['email']);
-					$lastName = mysqli_real_escape_string($connect, $_POST['lname']);
-					$firstName = mysqli_real_escape_string($connect, $_POST['fname']);
-					$phone = mysqli_real_escape_string($connect, $_POST['phone']);
-					$address = mysqli_real_escape_string($connect, $_POST['address']);
-					$city = mysqli_real_escape_string($connect, $_POST['city']);
-					$postalcode = mysqli_real_escape_string($connect, $_POST['postalcode']);
-					$password = mysqli_real_escape_string($connect, $_POST['password']);
-					
-					$checkPass = mysqli_query($connect, "SELECT Password FROM customer WHERE Email='$email'");
-					if(mysqli_num_rows($checkPass) > 0){
-						echo "Account exists, please login ";
-					} else{
-						$sql = "insert into customer (Email, Lastname, Firstname, Phone, Address, City, PostalCode, Password) values ('$email', '$lastName', '$firstName', '$phone', '$address', '$city', '$postalcode', '$password')";
-				
-						if (mysqli_query($connect, $sql)) {
-							$result = mysqli_query($connect, "SELECT CustomerID FROM customer WHERE Email='$email'");
+			<?php
+				if(isset($_POST['SubmitButton'])){
+					if (!empty($_POST['email']) &&
+                        !empty($_POST['password']) &&
+						!empty($_POST['lname']) && 
+						!empty($_POST['fname']) && 
+						!empty($_POST['phone']) && 
+						!empty($_POST['address']) && 
+						!empty($_POST['city']) && 
+						!empty($_POST['postalcode']))
+					{
+						include 'init.php';
+						$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
+						
+						$email = mysqli_real_escape_string($connect, $_POST['email']);
+						$lastName = mysqli_real_escape_string($connect, $_POST['lname']);
+						$firstName = mysqli_real_escape_string($connect, $_POST['fname']);
+						$phone = mysqli_real_escape_string($connect, $_POST['phone']);
+						$address = mysqli_real_escape_string($connect, $_POST['address']);
+						$city = mysqli_real_escape_string($connect, $_POST['city']);
+						$postalcode = mysqli_real_escape_string($connect, $_POST['postalcode']);
 
-							//$_SESSION['user_id'] = $result->fetch_row()[0];
-							//echo "<script>window.location.replace('index.php')</script>";
+						//https://www.php.net/manual/en/function.password-hash.php
+						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+						
+						$checkPass = mysqli_query($connect, "SELECT Password FROM customer WHERE Email='$email'");
+						if(mysqli_num_rows($checkPass) > 0){
+							echo "<div class='error'>Account exists, please login.</div>";
+						} else{
+							$sql = "insert into customer (Email, Lastname, Firstname, Phone, Address, City, PostalCode, Password) values ('$email', '$lastName', '$firstName', '$phone', '$address', '$city', '$postalcode', '$password')";
+					
+							if (mysqli_query($connect, $sql)) {
+								echo "<script>document.getElementById('register_form').innerHTML = '';</script>";
+								echo "<div class='success'>Account created, you will be redirected to the login screen.</div>";
+								echo "<script>setTimeout(function(){
+									window.location.replace('login.php');
+								 }, 5000);</script>";
+							}
 						}
-						else {
-							echo "Error: " . $sql . "<br>" . mysqli_error($connect);
-						}
-						//mysqli_query(connect, someSQLdemand);
-					}	
+					}
 				}
-			}
-		?>
+			?>
+		</div>
 	</body>
 </html>

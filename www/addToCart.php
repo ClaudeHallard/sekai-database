@@ -27,6 +27,7 @@
 	for($i=0;$i< $len;$i++) {
 		echo "<div id='productCanvas'> works" . $_SESSION['cartArray'][$i];  
 		echo "</div>";
+
 	}
 
 	echo "<div id='tocheckout'>Checkout</div>"

@@ -7,8 +7,7 @@
 		echo "<a href='logout.php' class='cart material-icons'>logout</a>";
 	}else{
 		echo "<a href='register.php' class='cart material-icons'>person_add</a>";
-		echo "<a href='' class='cart material-icons'>login</a>";
+		echo "<a href='login.php' class='cart material-icons'>login</a>";
 	}
 	echo "</div>";
-
 ?>
