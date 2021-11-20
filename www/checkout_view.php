@@ -51,6 +51,7 @@
 				<?php
 				$productID = 1;
 				if(isset($_POST['SubmitButton'])){
+					//Unsafe variables
 					$email = $_POST['email'];
 					$lastName = $_POST['lname'];
 					$firstName = $_POST['fname'];
@@ -63,18 +64,21 @@
 					include 'init.php';
 					$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 					$checkPass = mysqli_query($connect, "SELECT Password FROM customer WHERE Email='$email'");
+
+
+
 					if(mysqli_num_rows($checkPass) > 0){
 						echo "Account exists, please login ";
 					} else{
-						$sql = "insert into customer (Email, Lastname, Firstname, Phone, Address, City, PostalCode) values ('$email', '$lastName', '$firstName', '$phone', '$address', '$city', '$postalcode')";
-				
-						if (mysqli_query($connect, $sql)) {
+						$stmt = $connect->prepare("INSERT INTO customer (Email, Lastname, Firstname, Phone, Address, City, PostalCode) VALUES (?, ?, ?, ?, ?, ?, ?)");
+						$stmt->bind_param("sssssss", $email, $lastName, $firstName, $phone, $address, $city, $postalcode);
+						if ($stmt->execute()) {
 							echo "Order complete";
 						}
 						else {
-							echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+							echo "Error: " . $stmt . "<br>" . mysqli_error($connect);
 						}
-						//mysqli_query(connect, someSQLdemand);
+						$stmt->close();
 					}
 				}
 				?>
