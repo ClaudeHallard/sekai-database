@@ -71,7 +71,8 @@
 						$city = mysqli_real_escape_string($connect, $_POST['city']);
 						$postalcode = mysqli_real_escape_string($connect, $_POST['postalcode']);
 
-						$password = hash("sha512", $_POST['password']);
+						//https://www.php.net/manual/en/function.password-hash.php
+						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 						
 						$checkPass = mysqli_query($connect, "SELECT Password FROM customer WHERE Email='$email'");
 						if(mysqli_num_rows($checkPass) > 0){

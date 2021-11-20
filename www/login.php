@@ -45,15 +45,19 @@
 						$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 						
 						$email = mysqli_real_escape_string($connect, $_POST['email']);
-						$password = hash("sha512", $_POST['password']);
-						
-						$result = mysqli_query($connect, "SELECT CustomerID FROM customer WHERE Email='$email' AND Password='$password'");
+						$result = mysqli_query($connect, "SELECT CustomerID, Password FROM customer WHERE Email='$email'");
+
 						if(mysqli_num_rows($result) > 0){
-							$_SESSION['user_id'] = $result->fetch_row()[0];
-						    echo "<script>window.location.replace('index.php')</script>";
-						} else{
-							echo "<div class='error'>Either password or email is wrong. Try again.</div>";
-						}	
+							$row = $result->fetch_row();
+
+							//https://www.php.net/manual/en/function.password-verify.php
+							if(password_verify($_POST['password'], $row[1])){
+								$_SESSION['user_id'] = $row[0];
+						    	echo "<script>window.location.replace('index.php')</script>";
+							}
+						}
+						//Else
+						echo "<div class='error'>Either password or email is wrong. Try again.</div>";
 					}
 				}
 			?>
