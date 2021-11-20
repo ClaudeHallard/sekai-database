@@ -1,16 +1,6 @@
 * {
     box-sizing: border-box;
 }
-
-.topbar {
-    border-bottom: 1px solid black;
-    margin: 10px;
-	position: fixed;
-    top:0;
-    left:0;
-    right:0;
-}
-
 .cart{
     float: right;
     position: relative;
@@ -27,7 +17,6 @@
 }
 .product {
     font-family: haleboplight, Helvetica, Arial, sans-serif;
-    margin-top: 80px;
     border: 5px solid rgb(80, 0, 80);
 }
 .container {
@@ -69,13 +58,17 @@
     width: 100%;
     background-color: bisque;
 }
+
 .description {
-    margin: auto 10px 10px;;
+    margin: auto 10px 10px;
     border: 1px solid black;
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
     background-color: aquamarine;
+    /*https://stackoverflow.com/questions/15164288/floating-two-50-width-divs-with-a-10px-margin-between*/
     width: 49.3%;
+    width: -webkit-calc(50% - 10px);
+    width: calc(50% - 10px);
     text-indent: 50px;
 }
 
