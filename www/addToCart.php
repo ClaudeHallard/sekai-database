@@ -1,3 +1,9 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" href="css/addToCartStyle.css">
+	</head>
+
 <?php
 	session_start();
 
@@ -17,8 +23,11 @@
 
 	}
 
-	$len = sizeof($cart);
+	$len = sizeof($_SESSION['cartArray']);
 	for($i=0;$i< $len;$i++) {
-		echo "<p> works $_SESSION['CartArray'][$i] </p>";
+		echo "<div id='productCanvas'> works" . $_SESSION['cartArray'][$i];  
+		echo "</div>";
 	}
+
+	echo "<div id='tocheckout'>Checkout</div>"
 ?>
