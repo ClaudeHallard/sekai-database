@@ -8,15 +8,11 @@
 	session_start();
 
 	include 'init.php';
-	/*mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);*/
 	$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 	$IDs = "";
 	if(!empty($_POST['addToCart'])) {
 		$productID = $connect->real_escape_string($_POST['addToCart']);
-		/*if($productID == 1) {
-			$cart = array();
 
-		}*/
 		$cart = array();
 		$IDs = "('";
 		foreach($_SESSION['cartArray'] as $value) {
@@ -29,9 +25,8 @@
 
 	}
 	
-	$v = "esc " . $connect->real_escape_string($IDs) . " Pro " . $productID;
 	
-	$query = "select * from droduct where name in" . $IDs;
+	$query = "select * from product where Product_ID in" . $IDs;
 
 	if(!$result = $connect->query($query)) {
 		die('Error query');
@@ -44,10 +39,8 @@
 
 	print_r($result_array);
 
-	/*echo $query;*/
-	/*echo $v;*/
+	echo $query;
 
-	
 
 	$len = sizeof($_SESSION['cartArray']);
 	for($i=0;$i< $len;$i++) {
