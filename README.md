@@ -8,8 +8,9 @@ Note: You need to have initialized a database already. i.e created one in phpMyA
 
 ##Source
 
-[php SESSION vaiables](https://www.w3schools.com/php/php_sessions.asp)
-[send array in SESSION](https://web.archive.org/web/20080707052007/http://www.phpriot.com/articles/intro-php-sessions/7)
-[mysqli](https://www.php.net/manual/en/book.mysqli.php)
-[utf-8 array](https://stackoverflow.com/questions/16688179/how-to-convert-php-array-to-utf8)
-[utf-8](https://www.w3schools.com/php/func_mysqli_set_charset.asp)
+[php SESSION vaiables](https://www.w3schools.com/php/php_sessions.asp),
+[send array in SESSION](https://web.archive.org/web/20080707052007/http://www.phpriot.com/articles/intro-php-sessions/7),
+[mysqli](https://www.php.net/manual/en/book.mysqli.php),
+[utf-8 array](https://stackoverflow.com/questions/16688179/how-to-convert-php-array-to-utf8),
+[utf-8](https://www.w3schools.com/php/func_mysqli_set_charset.asp),
+[scrollbar css](https://stackoverflow.com/questions/50817727/change-scrollbar-height)
