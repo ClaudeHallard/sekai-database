@@ -1,13 +1,28 @@
 <?php
 	echo "<div class='topbar'>";
-	echo "<a href='index.php' class='home material-icons'>home</a>";
-	echo "<a href='#' class='cart material-icons'>shopping_cart_checkout</a>";
+	echo "<div class='home'>
+			<a href='index.php' class='material-icons'>home</a><br>
+			Home
+		</div>";
+	echo "<div class='cart'>
+			<a href='#' class='material-icons'>shopping_cart_checkout</a><br>
+			Cart
+		</div>";
 
 	if(!empty($_SESSION['user_id'])){
-		echo "<a href='logout.php' class='cart material-icons'>logout</a>";
+		echo "<div class='cart'>
+				<a href='logout.php' class='material-icons'>logout</a><br>
+				Cart
+			</div>";
 	}else{
-		echo "<a href='register.php' class='cart material-icons'>person_add</a>";
-		echo "<a href='login.php' class='cart material-icons'>login</a>";
+		echo "<div class='cart'>
+				<a href='register.php' class='material-icons'>person_add</a><br>
+				Signup
+			</div>";
+		echo "<div class='cart'>
+				<a href='login.php' class='material-icons'>login</a><br>
+				Login
+			</div>";
 	}
 	echo "</div>";
 ?>
