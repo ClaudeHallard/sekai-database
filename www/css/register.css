@@ -5,7 +5,6 @@
 .registerform {
     border: 2px solid black;
     margin: 10px auto;
-    max-width: 344px;
     width: fit-content;
     border-radius: 8px;
     font-family: haleboplight, Helvetica, Arial, sans-serif;
@@ -19,7 +18,7 @@
     background-color: #202020;
     overflow: hidden;
     color: #fff;
-    font-size: 1.25rem;
+    font-size: 1.25em;
 }
 
 .login {
@@ -37,6 +36,13 @@
     width: fit-content;
     margin: auto;
     font-weight: bold;
+    font-size: 1em;
+}
+
+@media only screen and (max-width: 374px){
+    .registerform form {
+        padding: 20px;
+    }
 }
 
 .registerform input {

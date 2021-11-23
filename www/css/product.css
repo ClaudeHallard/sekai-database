@@ -17,7 +17,11 @@
 }
 .product {
     font-family: haleboplight, Helvetica, Arial, sans-serif;
+	font-size: 1rem;
     border: 5px solid rgb(80, 0, 80);
+	margin: auto;
+	min-width: 300px;
+	width: 50%;
 }
 .container {
     margin: 10px;
@@ -30,7 +34,6 @@
     background-color: blanchedalmond;
 }
 .price {
-    
     border: 1px solid black;
     padding: 5px;
     background-color:blueviolet;
@@ -73,20 +76,13 @@
 }
 
 .addProdButton {
-    padding-top: 3px;
-	margin-bottom: auto;
-	font-size: 20px;
+	font-size: 1.25rem;
 	text-align: center;
-    
-	/*margin-right: 1200px;*/
-	margin-left: 5px;
-	float:left;
-	margin-bottom: auto;
-	margin-top: 10px;
+	margin: 10px;
 	cursor: pointer;
 	border: 2px solid #626262;
-	width: 100px;
-	height: 34px;
+	width: fit-content;
+	padding: 0 10px;
 	
     	/*top*/
 	-webkit-border-top-right-radius: 5px;

@@ -2,8 +2,8 @@
     session_start();
     // TODO
     //Redirect to front page if user is not admin.
-    //if(!empty($_SESSION['admin_id'])) {
-	if(!empty($_SESSION['user_id'])) { //Testing purposes
+    //if(empty($_SESSION['admin_id'])) {
+	if(empty($_SESSION['user_id'])) { //Testing purposes
 		header('Location: index.php');
 
         //https://thedailywtf.com/articles/WellIntentioned-Destruction
