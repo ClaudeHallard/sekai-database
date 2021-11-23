@@ -54,6 +54,13 @@
 							//https://www.php.net/manual/en/function.password-verify.php
 							if(password_verify($_POST['password'], $row[1])){
 								$_SESSION['user_id'] = $row[0];
+
+								$result = mysqli_query($connect, "SELECT Customer_ID FROM admins WHERE Customer_ID='" . $row[0] . "'");
+								if(mysqli_num_rows($result) > 0){
+									$row = $result->fetch_row();
+									$_SESSION['admin_id'] = $row[0];
+								}
+
 						    	echo "<script>window.location.replace('index.php')</script>";
 							}
 						}

@@ -1,20 +1,6 @@
 * {
     box-sizing: border-box;
 }
-.cart{
-    float: right;
-    position: relative;
-    color: rgb(80, 0, 80);
-	text-decoration: inherit;
-    font-size: 50px;
-}
-
-.home{
-    position: relative;
-    color: rgb(80, 0, 80);
-	text-decoration: inherit;
-    font-size: 50px;
-}
 .product {
     font-family: haleboplight, Helvetica, Arial, sans-serif;
 	font-size: 1rem;
