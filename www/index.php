@@ -46,6 +46,11 @@
 
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 
+				//Delete Product
+				if(isset($_POST['delete'])){
+					$Product_ID = mysqli_real_escape_string($connect, $_POST['delete']);
+					mysqli_query($connect, "DELETE FROM product WHERE Product_ID='$Product_ID';");
+				}
 
 				$query = "SELECT Product_ID, Name, Stock, Description, Price
 				FROM product";
@@ -111,6 +116,12 @@
 					echo "<div class='product'>";
 					echo "<div class='pimg'>";
 					echo "</div>";
+					if(!empty($_SESSION['admin_id'])){
+						echo "<form onsubmit='return confirmDelete();' method='post' action='' class='delete'>";
+							echo "<input type='hidden' name='delete' value='$Product_ID'>";
+							echo "<input class='delete_button' type='submit' value='&times'>";
+						echo "</form>";
+					}
 					echo "<p class='pName'> $Name </p>";
 					
 					#echo "<form method='get' action='product_view.php'>";
@@ -135,11 +146,15 @@
 
 				}
 
-
 				#$result->close();
 
 
 			?>
+			<script>
+				function confirmDelete() {
+					return confirm("Are you sure you want to delete this?");
+				}
+			</script>
 		</div>
 
 	</body>
