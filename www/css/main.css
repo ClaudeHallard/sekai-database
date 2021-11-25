@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 h2{
 	margin-top: 30px;
     	margin-right: 20px;
@@ -82,7 +86,6 @@ h2{
 }
 
 .product {
-	cursor: pointer;
 	margin-right: 20px;
        	margin-bottom: 20px;
 
@@ -159,6 +162,36 @@ h2{
 	margin-bottom: auto;
 	margin-top: auto;
 	font-size: 20px;
+}
+
+.delete {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	height: 26px;
+	width: 26px;
+	border: 1px solid black;
+	border-radius: 5px;
+	overflow:hidden;
+}
+.delete:hover{
+	opacity: 0.6;
+}
+.delete_button {
+	cursor: pointer;
+	font-size: 2rem;
+	color: #fff;
+	background-color: #276296;
+	text-align: center;
+
+	/* https://stackoverflow.com/a/19414020 */
+	position: absolute;
+    top: -100%;
+    bottom: -100%;
+	/* https://stackoverflow.com/a/41059954 */
+	margin-left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 }
 
 .price {
