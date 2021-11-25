@@ -75,7 +75,7 @@
 						//https://www.php.net/manual/en/function.password-hash.php
 						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 						
-						$checkPass = mysqli_query($connect, "SELECT Password FROM customer WHERE Email='$email'");
+						$checkPass = mysqli_query($connect, "SELECT * FROM customer WHERE Email='$email' AND Password IS NOT NULL");
 						if(mysqli_num_rows($checkPass) > 0){
 							echo "<div class='error'>Account exists, please login.</div>";
 						} else{

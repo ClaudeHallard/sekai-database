@@ -46,19 +46,20 @@
 						$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 						
 						$email = mysqli_real_escape_string($connect, $_POST['email']);
-						$result = mysqli_query($connect, "SELECT CustomerID, Password FROM customer WHERE Email='$email'");
+						$result = mysqli_query($connect, "SELECT CustomerID, Password FROM customer WHERE Email='$email' AND Password IS NOT NULL");
 
+						//Login
 						if(mysqli_num_rows($result) > 0){
-							$row = $result->fetch_row();
+							$row = $result->fetch_assoc();
 
-							//https://www.php.net/manual/en/function.password-verify.php
-							if(password_verify($_POST['password'], $row[1])){
-								$_SESSION['user_id'] = $row[0];
+							if(password_verify($_POST['password'], $row['Password'])){
+								$_SESSION['user_id'] = $row['CustomerID'];
 
-								$result = mysqli_query($connect, "SELECT Customer_ID FROM admins WHERE Customer_ID='" . $row[0] . "'");
+								//Check Admin privileges
+								$result = mysqli_query($connect, "SELECT Customer_ID FROM admins WHERE Customer_ID='" . $row['CustomerID'] . "'");
 								if(mysqli_num_rows($result) > 0){
-									$row = $result->fetch_row();
-									$_SESSION['admin_id'] = $row[0];
+									$row = $result->fetch_assoc();
+									$_SESSION['admin_id'] = $row['Customer_ID'];
 								}
 
 						    	echo "<script>window.location.replace('index.php')</script>";
