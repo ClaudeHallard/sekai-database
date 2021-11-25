@@ -27,6 +27,19 @@
 		echo "<p class='add'>Add</p>";?>-->
 		<div id="box">
 			<?php
+
+				/*class cartObject {
+
+					public $pid;
+					public $pamount;
+
+					public function __construct($pid,$pamount) {
+						$this->pid = $pid;
+						$this->paount = $paount;
+					}
+
+					public function 
+				}*/
 				
 				include 'init.php';
 
