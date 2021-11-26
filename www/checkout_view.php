@@ -3,14 +3,18 @@
 <html>
 <head>
 		<meta charset="UTF-8" http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-        	<title>e-com/checkoutview</title>
+		<title>e-com/checkoutview</title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/checkout.css">
+		<link rel="stylesheet" href="css/menu.css">
 </head>
     <body>
 
 <?php
 	include 'init.php';
 	session_start();
+	include 'menu.php';
 	$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 	$tempFname ="";
 	$tempLname ="";
