@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 h2{
 	margin-top: 30px;
     	margin-right: 20px;
@@ -7,6 +11,51 @@ h2{
     	cursor: pointer;
     	font-family: 'Raleway', sans-serif;
 }
+/* ifame cart style */
+#cartFrame{
+	z-index: 1;
+	position: relative;
+	right: 10px;
+	border: 1px solid #000;
+	/*box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.9), 0 1px 4px 0 rgba(0, 0, 0, 0.9);*/
+	/*top*/
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+
+	/*buttom*/
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;	
+	border-bottom-left-radius: 5px;
+	
+}
+
+#canvas {
+	right: 5px;
+	position: absolute;
+}
+
+#top-pointer {
+	position: relative;
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 25px solid #fff /*transparent*/;
+	/*position: absolute;*/
+	/*top: 0%;*/
+	left: 80%;
+	top:2px;
+	filter: drop-shadow(0 -1px 2px rgba(0, 0, 0, .9));
+
+}
+
 
 #icons {
 	font-size: 40px;
@@ -37,7 +86,6 @@ h2{
 }
 
 .product {
-	cursor: pointer;
 	margin-right: 20px;
        	margin-bottom: 20px;
 
@@ -114,6 +162,36 @@ h2{
 	margin-bottom: auto;
 	margin-top: auto;
 	font-size: 20px;
+}
+
+.delete {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	height: 26px;
+	width: 26px;
+	border: 1px solid black;
+	border-radius: 5px;
+	overflow:hidden;
+}
+.delete:hover{
+	opacity: 0.6;
+}
+.delete_button {
+	cursor: pointer;
+	font-size: 2rem;
+	color: #fff;
+	background-color: #276296;
+	text-align: center;
+
+	/* https://stackoverflow.com/a/19414020 */
+	position: absolute;
+    top: -100%;
+    bottom: -100%;
+	/* https://stackoverflow.com/a/41059954 */
+	margin-left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 }
 
 .price {

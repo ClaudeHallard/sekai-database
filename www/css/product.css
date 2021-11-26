@@ -1,34 +1,13 @@
 * {
     box-sizing: border-box;
 }
-
-.topbar {
-    border-bottom: 1px solid black;
-    margin: 10px;
-	position: fixed;
-    top:0;
-    left:0;
-    right:0;
-}
-
-.cart{
-    float: right;
-    position: relative;
-    color: rgb(80, 0, 80);
-	text-decoration: inherit;
-    font-size: 50px;
-}
-
-.home{
-    position: relative;
-    color: rgb(80, 0, 80);
-	text-decoration: inherit;
-    font-size: 50px;
-}
 .product {
     font-family: haleboplight, Helvetica, Arial, sans-serif;
-    margin-top: 80px;
+	font-size: 1rem;
     border: 5px solid rgb(80, 0, 80);
+	margin: auto;
+	min-width: 300px;
+	width: 50%;
 }
 .container {
     margin: 10px;
@@ -41,7 +20,6 @@
     background-color: blanchedalmond;
 }
 .price {
-    
     border: 1px solid black;
     padding: 5px;
     background-color:blueviolet;
@@ -69,12 +47,90 @@
     width: 100%;
     background-color: bisque;
 }
+
 .description {
-    margin: auto 10px 10px;;
+    margin: auto 10px 10px;
     border: 1px solid black;
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
     background-color: aquamarine;
-    width: 50%;
+    /*https://stackoverflow.com/questions/15164288/floating-two-50-width-divs-with-a-10px-margin-between*/
+    width: 49.3%;
+    width: -webkit-calc(50% - 10px);
+    width: calc(50% - 10px);
     text-indent: 50px;
 }
+
+.addProdButton {
+	font-size: 1.25rem;
+	text-align: center;
+	margin: 10px;
+	cursor: pointer;
+	border: 2px solid #626262;
+	width: fit-content;
+	padding: 0 10px;
+	
+    	/*top*/
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+
+	/*buttom*/
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.addProdButton:hover {
+    background-color: #e0f0ff;
+    color:white;
+}
+
+.checkButtonion {
+
+    padding-top: 3px;
+	margin-bottom: auto;
+	font-size: 20px;
+	text-align: center;
+    
+	/*margin-right: 1200px;*/
+	margin-left: 5px;
+	float:left;
+	margin-bottom: 3000px;
+	margin-top: 10px;
+	cursor: pointer;
+	border: 2px solid #626262;
+	width: 100px;
+	height: 34px;
+	
+    	/*top*/
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+
+	/*buttom*/
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+
+
+}
+
+.checkButtonion:hover {
+    background-color: #e0f0ff;
+    color:white;
+
+}
+

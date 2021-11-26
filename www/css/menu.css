@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+.topbar {
+	border-bottom: 1px solid black;
+	margin: 10px;
+	top:0;
+	left:0;
+	right:0;
+	height:80px;
+}
+
+.cart{
+	margin: 0px 10px;
+	width: 50px;
+	float: right;
+	text-align: center;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.cart a{
+	color: inherit;
+	text-decoration: inherit;
+	font-size: 50px;
+}
+
+/* https://stackoverflow.com/questions/11438380/center-text-larger-than-container-without-using-separate-child-element */
+.cart p, .home p{
+	margin: 0;
+	text-align: center;
+    position: relative;
+    left: +50%;
+}
+
+.cart p:before, .home p:before{
+    content: '';
+    display: inline-block;
+    margin-right: -100%;
+}
+
+.home{
+	margin: 0px 10px;
+	width: 50px;
+	float: left;
+	text-align: center;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.home a{
+	color: inherit;
+	text-decoration: inherit;
+	font-size: 50px;
+}
