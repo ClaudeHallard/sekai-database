@@ -42,14 +42,23 @@
 				}*/
 				
 				include 'init.php';
-
-
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 
 				//Delete Product
 				if(isset($_POST['delete'])){
 					$Product_ID = mysqli_real_escape_string($connect, $_POST['delete']);
 					mysqli_query($connect, "DELETE FROM product WHERE Product_ID='$Product_ID';");
+					mysqli_query($connect, "DELETE FROM cart_product WHERE Product_ID='$Product_ID';");
+
+					//https://stackoverflow.com/questions/369602/deleting-an-element-from-an-array-in-php
+					//Find and delete element
+					$index = array_search($Product_ID, $_SESSION['cartArray']);
+					if($index){
+						unset($_SESSION['cartArray'][$index]);
+
+						//Rearange array
+						$_SESSION['cartArray'] = array_values($_SESSION['cartArray']);
+					}
 				}
 
 				$query = "SELECT Product_ID, Name, Stock, Description, Price
