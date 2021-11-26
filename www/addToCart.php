@@ -7,7 +7,12 @@
 	</head>
 
 <?php
+
 	session_start();
+
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 
 	include 'init.php';
 	$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
@@ -22,14 +27,13 @@
 		/*print_r($cart);*/
 
 		if(!empty($_SESSION['user_id'])){
-			$getCart = "selsect * from cart_product where Customer_ID = '$_SESSION['user_id'])'";
-			
+			$getCart = "select * from cart_product where Customer_ID = '" . $_SESSION['user_id'] . "'";
 			if(!$cartResult = $connect->query($getCart)) {
 				die('Error query get cart');
 			}
 
 			$result_array = array();
-			while($picksRow = $result->fetch_assoc()){
+			while($picksRow = $cartResult->fetch_assoc()){
 				array_push($result_array,$picksRow);
 			}
 
@@ -37,10 +41,10 @@
 			for($i=0;$i< $len;$i++) {
 				$utfEncodedArray = array_map("utf8_encode", $result_array[$i] );
 				
-				if($ProductID == $utfEncodedArray['Product_ID']) {
+				if($productID == $utfEncodedArray['Product_ID']) {
 					$newAmount = $utfEncodedArray['Amount']+1;
 					$increaseAmount = "UPDATE cart_product SET Amount ='$newAmount' 
-					WHERE Product_ID = '$ProductID'";
+					WHERE Product_ID = '$productID'";
 					$cart[$utfEncodedArray['Product_ID']] = $newAmount;
 					$plus = 1;
 
@@ -59,18 +63,23 @@
 			}
 
 			if($plus == 0) {
-				$sql = "insert into prdoct (Custumer_ID, Product_ID, Amount) 
-				values ('$_SESSION['user_id'])', '$value', '',)"	
+				$sql = "insert into cart_product (Customer_ID, Product_ID, Amount) 
+				values ('" . $_SESSION['user_id'] . "', '$productID', '1',)";	
+				$inToCart = "INSERT INTO cart_product (Customer_ID, Product_ID, Amount)
+VALUES ('" . $_SESSION['user_id'] ."', '" . $productID . "', '1');";
+				/*if($connect->query($inToCart)) {
+					die('Error query add to cart');
+				}*/
 
 				$connect->begin_transaction();
 				try {
-					$connect->query($sql);
+					$connect->query($inToCart);
 					$connect->commit();
 				} catch (mysqli_sql_exception $exception) {
 					$connect->rollback();
 					throw $exception;
 				}
-				$cart[$ProductID] = 1;
+				$cart[$productID] = 1;
 				$IDs .= $productID;
 			}
 			$IDs .= "')";
@@ -102,14 +111,14 @@
 		}
 
 		if(!empty($_SESSION['user_id'])){
-			$getCart = "selsect * from cart_product where Customer_ID = '$_SESSION['user_id'])'";
-			
+			$getCart = "select * from cart_product where Customer_ID = '" . $_SESSION['user_id'] . "'";
+			echo "point 1";
 			if(!$cartResult = $connect->query($getCart)) {
 				die('Error query get cart');
 			}
 
 			$result_array = array();
-			while($picksRow = $result->fetch_assoc()){
+			while($picksRow = $cartResult->fetch_assoc()){
 				array_push($result_array,$picksRow);
 			}
 
@@ -121,9 +130,8 @@
 					if($utfEncodedArray['Amount'] > 1) {
 						$newAmount = $utfEncodedArray['Amount']-1;
 						$increaseAmount = "UPDATE cart_product SET Amount ='$newAmount' 
-						WHERE Product_ID = '$ProductID'";
+						WHERE Product_ID = '$productID'";
 						$cart[$utfEncodedArray['Product_ID']] = $newAmount;
-						$plus = 1;
 
 						$connect->begin_transaction();
 						try {
@@ -133,32 +141,30 @@
 							$connect->rollback();
 							throw $exception;
 						}
-						$IDs .= $utfEncodedArray['Product_ID'];
 					} else {
-						continue:
+						continue;
 					}
 				} else {
 					$cart[$utfEncodedArray['Product_ID']] = $utfEncodedArray['Amount'];
-					$IDs .= $utfEncodedArray['Product_ID'];
 				}
-				$IDs .= "','";
+				$IDs .= $utfEncodedArray['Product_ID'] . "','";
 			}
 			$IDs .= "')";
-			$_SESSION['cartArray'] = $cart;
-		} else {
+			$_SESSION['cartArray'] = $cart;			
+		}
+
+		else {
 			foreach($_SESSION['cartArray'] as $key => $value) {
 				if($subProductID == $key){
 					if($value > 1) {
 						$cart[$key] = $value-1;
-						$IDs .= $key;
 					} else {
 						continue;
 					}
 				} else {
 					$cart[$key] = $value;
-					$IDs .= $key;
 				}
-				$IDs .= "','";
+				$IDs .= $key . "','";
 			}		
 			$IDs .= "')";
 			$_SESSION['cartArray'] = $cart;
@@ -177,10 +183,9 @@
 		array_push($result_array,$picksRow);
 	}
 
-	/*print_r($result_array);
+	/*print_r($_SESSION['cartArray']);
 
 	echo $query;*/
-
 
 	$len = sizeof($_SESSION['cartArray']);
 	for($i=0;$i< $len;$i++) {
