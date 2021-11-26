@@ -129,7 +129,7 @@ VALUES ('" . $_SESSION['user_id'] ."', '" . $productID . "', '1');";
 					if($utfEncodedArray['Amount'] > 1) {
 						$newAmount = $utfEncodedArray['Amount']-1;
 						$increaseAmount = "UPDATE cart_product SET Amount ='$newAmount' 
-						WHERE Product_ID = '$productID'";
+						WHERE Product_ID = '$subProductID'";
 						$cart[$utfEncodedArray['Product_ID']] = $newAmount;
 
 						$connect->begin_transaction();
@@ -141,6 +141,19 @@ VALUES ('" . $_SESSION['user_id'] ."', '" . $productID . "', '1');";
 							throw $exception;
 						}
 					} else {
+
+						$del = "DELETE FROM cart_product WHERE Customer_ID ='" . $_SESSION['user_id'] ."' AND 
+						Product_ID ='" . $subProductID . "';";
+
+						$connect->begin_transaction();
+						try {
+							$connect->query($del);
+							$connect->commit();
+						} catch (mysqli_sql_exception $exception) {
+							$connect->rollback();
+							throw $exception;
+						}
+
 						continue;
 					}
 				} else {
