@@ -69,7 +69,6 @@
 				<?php
 
 				function cartToOrder($connect, $customerID){
-					echo "FUNC";
 					$date = date("Y/m/d");
 					$notDelivered = 0;
 					// INSERT in i product_order (PRODUCT)
@@ -105,7 +104,6 @@
 									}
 
 									mysqli_commit($connect);
-									echo "trying";
 								} catch(mysqli_sql_exception $exception){
 									mysqli_rollback($connect);
 								} 
@@ -148,7 +146,6 @@
 							$result1 = $stmt1->get_result();
 							$tempArray = $result1->fetch_assoc();
 							$guestCustomerID = $tempArray['CustomerID'];
-							echo $guestCustomerID;  
 							if (cartToOrder($connect, $guestCustomerID)) {
 								echo "Order complete";
 							}
