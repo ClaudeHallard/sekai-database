@@ -112,7 +112,6 @@ VALUES ('" . $_SESSION['user_id'] ."', '" . $productID . "', '1');";
 
 		if(!empty($_SESSION['user_id'])){
 			$getCart = "select * from cart_product where Customer_ID = '" . $_SESSION['user_id'] . "'";
-			echo "point 1";
 			if(!$cartResult = $connect->query($getCart)) {
 				die('Error query get cart');
 			}
