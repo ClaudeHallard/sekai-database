@@ -11,6 +11,11 @@ h2{
     	cursor: pointer;
     	font-family: 'Raleway', sans-serif;
 }
+
+img {
+	height: 100%;
+	width: 100%;
+}
 /* ifame cart style */
 #cartFrame{
 	z-index: 1;
@@ -120,7 +125,23 @@ h2{
 	margin-right: auto;
 	height: 150px;
 	width: 150px;
-	background-color: #5792c6;
+	border: 1px solid /*#5792c6*/ #626262;
+
+	/*top*/
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+
+	/*buttom*/
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
             
 .toCart {

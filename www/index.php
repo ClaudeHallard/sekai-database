@@ -61,7 +61,7 @@
 					}
 				}
 
-				$query = "SELECT Product_ID, Name, Stock, Description, Price
+				$query = "SELECT Product_ID, Name, Stock, Description, Price, URL
 				FROM product";
 
 				if(!$result = $connect->query($query)) {
@@ -115,15 +115,19 @@
 					$Stock = $utfEncodedArray['Stock'];
 					$Description = $utfEncodedArray['Description'];
 					$Price = $utfEncodedArray['Price'];
-					
+					$Picture = $utfEncodedArray['URL'];
+
+					#pic to test
+					#$Picture = "https://cdn.pixabay.com/photo/2013/07/12/18/20/shoes-153310_960_720.png";
+
 					#print_r($utfEncodedArray);
 					#foreach($utfEncodedArray as $key => $value)
 					#{
 	  					#if($key == Name) {
 
-
 					echo "<div class='product'>";
 					echo "<div class='pimg'>";
+					echo "<img src='$Picture' alt='image of the product'/>";
 					echo "</div>";
 					if(!empty($_SESSION['admin_id'])){
 						echo "<form onsubmit='return confirmDelete();' method='post' action='' class='delete'>";
