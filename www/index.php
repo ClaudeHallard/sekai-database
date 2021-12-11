@@ -58,9 +58,15 @@
 				}
 				header("Location: index.php");
 				exit; 
+				# https://stackoverflow.com/questions/20510243/clear-the-form-field-after-successful-submission-of-php-form
 			}
 
-			$query = "SELECT * FROM product";
+			if(!empty($_GET['category'])) {
+				$cleanCategory = $connect->real_escape_string($_GET['category']);
+				$query = "SELECT * FROM product WHERE Category='" . $cleanCategory ."'";
+			} else {
+				$query = "SELECT * FROM product";
+			}
 
 			if(!$result = $connect->query($query)) {
 				die('Error query');
@@ -80,7 +86,8 @@
 
 			#print_r($result_array);
 			
-
+			# category array
+			$cat = array();
 
 			echo "<div id='box'>";
 
@@ -104,6 +111,9 @@
 				#foreach($utfEncodedArray as $key => $value)
 				#{
 					#if($key == Name) {
+				if(!in_array($Category, $cat)) {
+					array_push($cat, $Category);
+				}
 				
 				echo "<div class='product'>";
 				echo "<div class='pimg'>";
@@ -147,6 +157,26 @@
 				}
 			</script>
 			</div>";
+			
+			echo "<div id='sidebar'> category";
+			#echo "<div class='categorylist'> category";
+			foreach($cat as $value) {
+				echo "<form method='get' action=''>";
+					echo "<input type='hidden' name='category' value='$value'>";
+					echo "<input class='categorylist' type='submit' value='$value'>";
+				echo "</form>";
+			}		
+			
+			if(isset($_GET['category'])) {
+				echo "<a href='index.php' title='Back' style='color: inherit; 
+				text-decoration: inherit;'><div class='categorylist'> 
+				<i href='index.php' class='material-icons' 
+				style='font-size:50px;'>chevron_left</i> </div></a>";	
+			}
+			
+			#echo "</div>";
+
+			echo "</div>";
 		?>
 		
 	</body>
