@@ -14,6 +14,11 @@
 				<a href='logout.php' class='material-icons'>logout</a>
 				<p>Logout</p>
 			</div>";
+
+		echo "<div class='cart'>
+				<a href='order_history.php' class='material-icons'>history</a>
+				<p>Orders</p>
+			</div>";
 		if(!empty($_SESSION['admin_id'])){
 			echo "<div class='cart'>
 				<a href='add_product.php' class='material-icons'>add_circle_outline</a>
