@@ -1,0 +1,25 @@
+.order {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 5px;
+}
+
+.orders {
+    border: 2px solid black;
+    margin: 10px auto;
+    width: fit-content;
+    border-radius: 8px;
+    font-family: haleboplight, Helvetica, Arial, sans-serif;
+    overflow:hidden;
+    min-width: 300px;
+}
+
+.order_header {
+    width: 50%;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-bottom-right-radius: 10px;
+    background-color: #000000;
+    overflow: hidden;
+    color: #fff;
+}
