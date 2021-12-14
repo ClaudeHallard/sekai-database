@@ -56,7 +56,7 @@
     background-color: aquamarine;
     /*https://stackoverflow.com/questions/15164288/floating-two-50-width-divs-with-a-10px-margin-between*/
     width: 49.3%;
-    width: -webkit-calc(50% - 10px);
+	width: -webkit-calc(50% - 10px);
     width: calc(50% - 10px);
     text-indent: 50px;
 }
@@ -134,3 +134,65 @@
 
 }
 
+
+
+/* Box styles */
+.review {
+	border: none;
+	padding: 5px;
+	font: 28px aerial;
+	width: 100%;
+	height: 200px;
+	overflow-y: scroll;
+	margin-top:40px;
+	}
+	
+	/* Scrollbar styles */
+	::-webkit-scrollbar {
+	width: 15px;
+	height: 15px;
+	}
+	
+	::-webkit-scrollbar-track {
+	border: 1px solid #E91E63;
+	border-radius: 15px;
+	}
+	
+	::-webkit-scrollbar-thumb {
+	background: #E91E63;  
+	border-radius: 15px;
+	}
+	
+	::-webkit-scrollbar-thumb:hover {
+	background: #E91E63;  
+}
+
+
+.submit {
+    /*margin: 20px; */
+	margin-top: 20px;
+    transition: box-shadow .1s;
+    border-radius:10px;
+    border: 1px solid #3c9710;
+    background: #42a512;
+    width: 200px;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.submit:hover {
+    background-color: #3c9710;
+    box-shadow: 0 0 11px rgba(0, 255, 0, 0.3); 
+}
+
+.container1 {
+    margin: 10px;
+    display: grid;
+    /*grid-template-columns: 1fr 1fr;*/
+}
+
+.ReviewForm {
+    margin: 10px;
+    display: grid;
+
+}

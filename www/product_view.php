@@ -2,8 +2,8 @@
     session_start();
 
 	$productID = 1;
-	if(!empty($_POST['product_id'])) {
-		$productID = $_POST['product_id'];
+	if(!empty($_GET['product_id'])) {
+		$productID = $_GET['product_id'];
 	}
 ?>
 
@@ -58,19 +58,66 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="description">
-				<?php echo "<p>$product_description</p>" ?>
-			</div>
 			
-			<div class="addProdButton">
-				Add to cart
+			<div class="container1">
+				<div class="description">
+					<?php echo "<p>$product_description</p>" ?>
+				</div>
+				<div>
+					<div class="addProdButton">
+					<?php
+					/*
+					echo "<form method='post' target='iframeCart' action='addToCart.php'>";
+					echo "<input type='hidden' name='addToCart' value='$Product_ID'>";
+					echo "<input class='toView' type='submit' value='Add'>";
+					echo "</form>"; */
+					?>
+					Add to cart
+					</div>
+				</div>				
+			</div>
+			<?php
+
+			if(!empty($_SESSION['user_id'])){
+				echo "<div class='ReviewForm'>
+					<form action='' method='post' autocomplete='off'>
+						<label for='fname'>Grade (1-5):</label><br>
+						<input type='number' min='1' max='5' id='grade' name='grade'><br>
+						<label for='writeReview'>Review:</label><br>
+						<textarea id='writeReview' name='writeReview' rows='5' cols='21'></textarea><br>						
+						<input type='submit' class='submit' name='SubmitRevButton' value='Submit Review'/>
+					</form>
+				</div>";
+			}
+			
+			//mysqli_query($connect,"INSERT INTO review (Customer_ID, Grade, Text) VALUES ('$_SESSION[user_id]', '2', 'I really likelike it')");
+			if(isset($_POST['SubmitRevButton'])){
+				$grade = $_POST['grade'];
+				$reviewText = $_POST['writeReview'];
+				$stmt = $connect->prepare("INSERT INTO review (Customer_ID, Product_ID, Grade, Text) VALUES (?, ?, ?, ?)");
+				$stmt->bind_param("ssss", $_SESSION['user_id'], $productID, $grade, $reviewText);
+				$stmt->execute();
+				
+			}
+			?>
+
+			<!--dhttps://www.positronx.io/create-html-scroll-box/-->
+			<div class="review">
+				<?php
+					$grab = "SELECT * FROM review WHERE Product_ID='$productID'";
+					$result = mysqli_query($connect, $grab);
+					echo"REVIEWS <br>";
+					echo"--------------------- <br>";
+					While($row = $result->fetch_assoc()){
+						echo"Customer: $row[Customer_ID] <br>";
+						echo"Grade: $row[Grade] <br>";
+						echo"$row[Text] <br>";
+						echo"---------------------";
+						echo"<br>";
+					}
+				?>
 			</div>
 		</div>
-		<!--
-		<div class="checkButtonion">
-		<a href="checkout_view.php">Checkout</a>
-		</div>	
-			-->
+
 	</body>
 </html>
