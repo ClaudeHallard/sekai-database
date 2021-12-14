@@ -127,8 +127,8 @@
 				}
 				echo "<p class='pName'> $Name </p>";
 				
-				#echo "<form method='get' action='product_view.php'>";
-				echo "<form method='post' action='product_view.php'>";
+				echo "<form method='get' action='product_view.php'>";
+				#echo "<form method='post' action='product_view.php'>";
 					echo "<input type='hidden' name='product_id' value='$Product_ID'>";
 					echo "<input class='toView' type='submit' value='View'>";
 				echo "</form>";

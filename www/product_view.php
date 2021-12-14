@@ -1,10 +1,5 @@
 <?php
     session_start();
-
-	$productID = 1;
-	if(!empty($_GET['product_id'])) {
-		$productID = $_GET['product_id'];
-	}
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +25,12 @@
 				include 'init.php';
 				$connect = new mysqli($dbsever,$dbusername,$dbpassword, $dbname) or die("can't connect");
 				$connect->set_charset("utf8");
+				
+				$productID = 1;
+				if(!empty($_GET['product_id'])) {
+					$productID = $connect->real_escape_string($_GET['product_id']);
+				}
+				
 				$query = "SELECT * FROM product WHERE product_ID = '$productID'";
 				if(!$result = $connect->query($query)) {
 					die('Error query');
@@ -98,19 +99,21 @@
 				$stmt = $connect->prepare("INSERT INTO review (Customer_ID, Product_ID, Grade, Text) VALUES (?, ?, ?, ?)");
 				$stmt->bind_param("ssss", $_SESSION['user_id'], $productID, $grade, $reviewText);
 				$stmt->execute();
-				
+				header("Location: product_view.php?product_id=" . $productID);
+				exit; 
 			}
 			?>
 
 			<!--dhttps://www.positronx.io/create-html-scroll-box/-->
 			<div class="review">
 				<?php
-					$grab = "SELECT * FROM review WHERE Product_ID='$productID'";
+					#$grab = "SELECT * FROM review WHERE Product_ID='$productID'";
+					$grab = "SELECT r.*, c.FirstName FirstName FROM review r NATURAL JOIN customer c WHERE r.Product_ID='$productID' AND c.CustomerID = r.Customer_ID";
 					$result = mysqli_query($connect, $grab);
 					echo"REVIEWS <br>";
 					echo"--------------------- <br>";
 					While($row = $result->fetch_assoc()){
-						echo"Customer: $row[Customer_ID] <br>";
+						echo"Customer: $row[FirstName] <br>";
 						echo"Grade: $row[Grade] <br>";
 						echo"$row[Text] <br>";
 						echo"---------------------";
