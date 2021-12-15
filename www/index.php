@@ -8,6 +8,13 @@
         	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/menu.css">
+		
+		<script>
+			// https://stackoverflow.com/questions/6320113/how-to-prevent-form-resubmission-when-page-is-refreshed-f5-ctrlr
+			if(window.history.replaceState) {
+					window.history.replaceState(null, null, window.location.herf);
+			}
+		</script>
 	</head>
 
 	<body>
@@ -60,13 +67,37 @@
 				exit; 
 				# https://stackoverflow.com/questions/20510243/clear-the-form-field-after-successful-submission-of-php-form
 			}
-
+			
+			$ifcat="";
+			
 			if(!empty($_GET['category'])) {
 				$cleanCategory = $connect->real_escape_string($_GET['category']);
-				$query = "SELECT * FROM product WHERE Category='" . $cleanCategory ."'";
-			} else {
-				$query = "SELECT * FROM product";
+				$ifcat = " WHERE Category='" . $cleanCategory ."'";
 			}
+			
+			if(!empty($_POST['order'])) {
+				$cleanOrder = $connect->real_escape_string($_POST['order']);
+				if($cleanOrder == "lowestPrice") {
+					$ifcat .= " ORDER BY Price";
+				} elseif ($cleanOrder == "highestPrice") {
+					$ifcat .= " ORDER BY Price desc";
+				} elseif($cleanOrder == "highestRating") {
+					$ifcat = " p NATURAL JOIN (SELECT Product_ID, AVG(Grade) rate FROM review GROUP BY Product_ID) g" . $ifcat . " ORDER BY rate desc";
+				}
+			}
+			
+			# https://www.w3schools.com/sql/sql_ref_order_by.asp
+			/*if(!empty($_GET['category'])) {
+				$cleanCategory = $connect->real_escape_string($_GET['category']);
+				if(isset($_POST['order'])) {
+						$query = "SELECT * FROM product WHERE Category='" . $cleanCategory ."' ORDER BY Price";
+				} else {
+						$query = "SELECT * FROM product WHERE Category='" . $cleanCategory ."'";
+				}
+			} else {
+				#$query = "SELECT * FROM product";*/
+				$query = "SELECT * FROM product" . $ifcat;
+			/*}*/
 
 			if(!$result = $connect->query($query)) {
 				die('Error query');
@@ -158,7 +189,24 @@
 			</script>
 			</div>";
 			
-			echo "<div id='sidebar'> category";
+			echo "<div id='sidebar'> Order";
+			
+			echo "<form method='post' action=''>";
+				echo "<input type='hidden' name='order' value='lowestPrice'>";
+				echo "<input class='categorylist' type='submit' value='Lowest Price'>";
+			echo "</form>";
+			
+			echo "<form method='post' action=''>";
+				echo "<input type='hidden' name='order' value='highestPrice'>";
+				echo "<input class='categorylist' type='submit' value='Highest Price'>";
+			echo "</form>";
+			
+			echo "<form method='post' action=''>";
+				echo "<input type='hidden' name='order' value='highestRating'>";
+				echo "<input class='categorylist' type='submit' value='Highest Rating'>";
+			echo "</form>";
+			
+			echo "Category";
 			#echo "<div class='categorylist'> category";
 			foreach($cat as $value) {
 				echo "<form method='get' action=''>";
