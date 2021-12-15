@@ -66,16 +66,12 @@
 					<?php echo "<p>$product_description</p>" ?>
 				</div>
 				<div>
-					<div class="addProdButton">
 					<?php
-					/*
 					echo "<form method='post' target='iframeCart' action='addToCart.php'>";
-					echo "<input type='hidden' name='addToCart' value='$Product_ID'>";
-					echo "<input class='toView' type='submit' value='Add'>";
-					echo "</form>"; */
+					echo "<input type='hidden' name='addToCart' value='$productID'>";
+					echo "<input class='addProdButton' type='submit' value='Add to cart'>";
+					echo "</form>"; 
 					?>
-					Add to cart
-					</div>
 				</div>				
 			</div>
 			<?php

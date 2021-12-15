@@ -110,6 +110,7 @@
 									mysqli_commit($connect);
 								} catch(mysqli_sql_exception $exception){
 									mysqli_rollback($connect);
+									throw $exception;
 								} 
 							} 
 						}
