@@ -1,11 +1,23 @@
 <?php
+	# https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
+	echo "<script>
+		function showCart() {
+		  var x = document.getElementById('canvas');
+		  if (x.style.display === 'none') {
+			x.style.display = 'block';
+		  } else {
+			x.style.display = 'none';
+		  }
+		}
+	</script>";
+
 	echo "<div class='topbar'>";
 	echo "<div class='home'>
 			<a href='index.php' class='material-icons'>home</a>
 			<p>Home</p>
 		</div>";
 	echo "<div class='cart'>
-			<a href='#' class='material-icons'>shopping_cart_checkout</a>
+			<i onclick='showCart()' class='material-icons'>shopping_cart_checkout</i>
 			<p>Cart</p>
 		</div>";
 
@@ -36,4 +48,10 @@
 			</div>";
 	}
 	echo "</div>";
+	
+	echo"	
+	<div id='canvas'>
+		<div id='top-pointer'> </div>
+		<iframe name='iframeCart' id='cartFrame' src='addToCart.php' height='400' width='300' name='IframeCart'></iframe>
+	</div>";
 ?>

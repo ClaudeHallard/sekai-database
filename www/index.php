@@ -14,6 +14,7 @@
 			if(window.history.replaceState) {
 					window.history.replaceState(null, null, window.location.herf);
 			}
+			
 		</script>
 	</head>
 
@@ -26,10 +27,6 @@
 		session_start();
 		include 'menu.php';
 		?>
-		<div id="canvas">
-			<div id="top-pointer"> </div>
-			<iframe name="iframeCart" id="cartFrame" src="addToCart.php" height="400" width="300" name="IframeCart"></iframe>
-		</div>
 		<!--<?php echo "<h2>Det är givet att te är livet!!</h2>"; 
 		echo "<p class='add'>Add</p>";?>-->
 		
