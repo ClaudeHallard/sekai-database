@@ -106,13 +106,13 @@
 					#$grab = "SELECT * FROM review WHERE Product_ID='$productID'";
 					$grab = "SELECT r.*, c.FirstName FirstName FROM review r NATURAL JOIN customer c WHERE r.Product_ID='$productID' AND c.CustomerID = r.Customer_ID";
 					$result = mysqli_query($connect, $grab);
-					echo"REVIEWS <br>";
-					echo"--------------------- <br>";
+					echo"<div style='border-radius:15px; border: 2px solid #000; border-top-left-radius:0px; color:#fff; background-color:#000; font-family: great vibes, cursive; margin:0px; padding:0px; width: 130px;' > Reviews </div>";
+					echo"<hr>";
 					While($row = $result->fetch_assoc()){
-						echo"Customer: $row[FirstName] <br>";
+						echo" <p style='font-size:24pt; font-weight:bold; margin:0px; font-family: Arial;'>Customer : $row[FirstName] </p> ";
 						echo"Grade: $row[Grade] <br>";
 						echo"$row[Text] <br>";
-						echo"---------------------";
+						echo"<hr>";
 						echo"<br>";
 					}
 				?>
