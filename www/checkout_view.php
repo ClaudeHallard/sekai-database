@@ -72,7 +72,20 @@
 
 				<?php
 
+
+
 				function cartToOrder($connect, $customerID){
+					// Check stock			
+					foreach($_SESSION['cartArray'] as $eProductID => $amountP){
+						$checkAvailability = "SELECT Stock, Name FROM product WHERE Product_ID='$eProductID'";
+						$result =$connect->query($checkAvailability);
+						$tempRow = $result->fetch_assoc();
+						if($amountP > $tempRow['Stock']){
+							echo "There is only $tempRow[Stock] of $tempRow[Name] in stock <br>";
+							return;
+						}
+					}
+
 					$date = date("Y/m/d");
 					$notDelivered = 0;
 					// INSERT in i product_order (PRODUCT)
@@ -159,7 +172,7 @@
 							}
 						}
 					}
-				}	
+				}
 				?>
         </div>
 	</body>
