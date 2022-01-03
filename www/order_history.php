@@ -43,7 +43,7 @@
                 ON
                 ordered_product.Product_ID = product.Product_ID
                 WHERE
-                Customer_ID=" . $_SESSION['user_id'] . ";");
+                Customer_ID=" . $_SESSION['user_id'] . " ORDER BY Order_ID;");
 
                 if(!$orders) {
                     die('Error query');

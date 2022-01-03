@@ -75,59 +75,50 @@
 
 
 				function cartToOrder($connect, $customerID){
-					// Check stock			
-					foreach($_SESSION['cartArray'] as $eProductID => $amountP){
-						$checkAvailability = "SELECT Stock, Name FROM product WHERE Product_ID='$eProductID'";
-						$result =$connect->query($checkAvailability);
-						$tempRow = $result->fetch_assoc();
-						if($amountP > $tempRow['Stock']){
-							echo "There is only $tempRow[Stock] of $tempRow[Name] in stock <br>";
-							return;
-						}
-					}
-
 					$date = date("Y/m/d");
 					$notDelivered = 0;
-					// INSERT in i product_order (PRODUCT)
-					$stmt1 = "INSERT INTO product_order (Customer_ID, OrderDate, isDelivered) VALUES ('".$customerID."', '$date', '$notDelivered')";
-					$returnOpt = mysqli_query($connect, $stmt1);
-		
-					// GET order_ID 
-					$grab = "SELECT * FROM product_order WHERE Customer_ID='$customerID'";
-					mysqli_query($connect, $grab);
 
-					$result = $connect->query($grab);
-					if($result->num_rows > 0){
-						While($row = $result->fetch_assoc()){
-							foreach($_SESSION['cartArray'] as $eProductID => $amountP){
-								$grab = "SELECT Price FROM product WHERE Product_ID='$eProductID'";
-								$tempGrabResult = mysqli_query($connect, $grab);
-								$row1 = $tempGrabResult->fetch_assoc();
-								                                                                                                                          								
-								//https://www.php.net/manual/en/mysqli.begin-transaction.php
-								mysqli_begin_transaction($connect);
-								try{
-									$stmtCheck = "SELECT * FROM ordered_product WHERE Product_ID='$eProductID' AND Order_ID='$row[Order_ID]'";
-									$checkExistence = mysqli_query($connect, $stmtCheck);
-									$stmtUpd = "UPDATE ordered_product SET Amount = Amount + $amountP WHERE Product_ID='$eProductID' AND Order_ID='$row[Order_ID]' ";
-									if($checkExistence->num_rows > 0){
-										mysqli_query($connect, $stmtUpd);
-									}
-									else{
-										$removeStock = "UPDATE product SET Stock = Stock - $amountP WHERE Product_ID='$eProductID'";
-										mysqli_query($connect, $removeStock);
-										$stmt2 = "INSERT INTO ordered_product (Order_ID, Product_ID, Amount, Price) VALUES ('$row[Order_ID]', '$eProductID', '$amountP', '$row1[Price]')";
-										$checking = mysqli_query($connect, $stmt2);
-									}
+					//https://www.php.net/manual/en/mysqli.begin-transaction.php
+					mysqli_begin_transaction($connect);
+					try{						
+						// INSERT in i product_order (PRODUCT)
+						$stmt1 = "INSERT INTO product_order (Customer_ID, OrderDate, isDelivered) VALUES ('".$customerID."', '$date', '$notDelivered')";
+						$returnOpt = mysqli_query($connect, $stmt1);
 
-									mysqli_commit($connect);
-								} catch(mysqli_sql_exception $exception){
-									mysqli_rollback($connect);
-									throw $exception;
-								} 
-							} 
-						}
-					}
+						// GET order_ID 
+						$theOrderID = mysqli_insert_id($connect);
+
+						foreach($_SESSION['cartArray'] as $eProductID => $amountP){
+							// Check stock	
+							$checkAvailability = "SELECT Stock, Name FROM product WHERE Product_ID='$eProductID'";
+							$result =$connect->query($checkAvailability);
+							$tempRow = $result->fetch_assoc();
+							if($amountP > $tempRow['Stock']){
+								echo "There is only $tempRow[Stock] of $tempRow[Name] in stock <br>";
+								throw new exception('hej');
+							}
+							//[Place an order]
+
+							//Get price
+							$grab = "SELECT Price FROM product WHERE Product_ID='$eProductID'";
+							$tempGrabResult = mysqli_query($connect, $grab);
+							$row1 = $tempGrabResult->fetch_assoc();
+
+							//Remove stock
+							$removeStock = "UPDATE product SET Stock = Stock - $amountP WHERE Product_ID='$eProductID'";
+							mysqli_query($connect, $removeStock);
+							
+							// Add order
+							$stmt2 = "INSERT INTO ordered_product (Order_ID, Product_ID, Amount, Price) VALUES ('$theOrderID', '$eProductID', '$amountP', '$row1[Price]')";
+							$checking = mysqli_query($connect, $stmt2);	
+
+						}							
+						mysqli_commit($connect);
+					} catch(mysqli_sql_exception $exception){
+						mysqli_rollback($connect);
+						//throw $exception;
+					} 
+
 					return $returnOpt;
 				} 
 

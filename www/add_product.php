@@ -33,11 +33,11 @@
                 </div>
                 <div class="half">
                     <label>Stock</label>
-                    <input name="stock" placeholder="Enter stock amount" required>
+                    <input type='number' min='1' name='stock' placeholder="Enter stock" required>
                 </div>
                 <div class="half">
                     <label>Price</label>
-                    <input name="price" placeholder="Enter price" required>
+                    <input type='number' min='1' name='price' placeholder="Enter price" required>
                 </div>
                 <br> <!-- You think I care -->
                 <div class="half">
